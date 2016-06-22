@@ -44,6 +44,7 @@ class Cuckoo(Module):
         self.parser.add_argument('-m', '--machine',  help='Name of Machine or all')
         self.parser.add_argument('-p', '--package',  help='Select a package type to run')
         self.parser.add_argument('-o', '--options',  help='Options in the format "procmemdump=yes,nohuman=yes"')
+        self.parser.add_argument('-i', '--instance', help='Select a Cuckoo instance')
 
 
     def add_file(self, file_path, tags, parent):
@@ -92,7 +93,13 @@ class Cuckoo(Module):
         # Get the connections string from config
 
         if cfg.cuckoo.cuckoo_host:
-            cuckoo_host = cfg.cuckoo.cuckoo_host
+            if self.args.instance == "offline":
+                cuckoo_host = cfg.cuckoooffline.cuckoo_host
+            elif self.args.instance == "online":
+                cuckoo_host = cfg.cuckoo.cuckoo_host
+            else:
+                self.log('error', 'Cuckoo instance not set')
+                return
         else:
             self.log('error', 'Cuckoo Config Not Set')
             return
