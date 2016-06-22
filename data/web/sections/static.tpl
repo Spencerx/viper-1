@@ -42,12 +42,12 @@
         </tr>
         <tr>
             <th></th>
-            <td><a class="btn btn-primary btn-small" href="/get/{{project}}/{{file_info[8]}}">Download</a> <a class="btn btn-primary btn-small" onClick="$('#cuckoo').load('/cuckoo/submit?hash={{file_info[8]}}&amp;project={{project}}');">Cuckoo</a> <span id="cuckoo"></span></td>
-        </tr>          
+            <td><a class="btn btn-primary btn-small" href="/get/{{project}}/{{file_info[8]}}">Download</a> <a class="btn btn-primary btn-small" onClick="$('#cuckoo').load('/cuckoo/submit?hash={{file_info[8]}}&amp;project={{project}}&amp;instance=offline');">Cuckoo-Offline</a><span id="cuckoo2"></span> <a class="btn btn-primary btn-small btn-danger" onClick="$('#cuckoo').load('/cuckoo/submit?hash={{file_info[8]}}&amp;project={{project}}&amp;instance=online');">Cuckoo-Online</a>  <span id="cuckoo"></span></td>
+        </tr>
     </table>
 
     <div class="alert alert-success" role="alert">
-        Tags: 
+        Tags:
         % for tag in file_info[1].split(','):
             % if len(tag) > 0:
                 % tag = tag.strip()
@@ -77,35 +77,35 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <script>
     function delTag(tagName) {
     path = "/tags/del";
-    
+
     var form = document.createElement("form");
     form.setAttribute("method", "post");
     form.setAttribute("action", path);
-    
+
     // SHA256
     var shaField = document.createElement("input");
     shaField.setAttribute("type", "hidden");
     shaField.setAttribute("name", "sha256");
     shaField.setAttribute("value", "{{file_info[8]}}");
     form.appendChild(shaField);
-    
+
     // Tag Name
     var tagField = document.createElement("input");
     tagField.setAttribute("type", "hidden");
     tagField.setAttribute("name", "tag");
     tagField.setAttribute("value", tagName);
     form.appendChild(tagField);
-    
+
     document.body.appendChild(form);
     form.submit();
     alert(form.tagField.value);
     window.location.reload();
     }
-    
+
     </script>
 </div>
