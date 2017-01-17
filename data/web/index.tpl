@@ -33,6 +33,11 @@
                 <input type="text" class="form-control" name="tag_list" id="tag_list" placeholder="List of Tags">
             </div>
 
+            <div class="form-group">
+                <label for="note_title">Submitter</label>
+                <input type="text" class="form-control" name="note_title" id="note_title" placeholder="user.a@domain.com">
+            </div>
+
             <input type="hidden" name="project" value="{{p}}" />
             <button type="submit" class="btn btn-default">Upload</button>
         </form>
