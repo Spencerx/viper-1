@@ -35,7 +35,7 @@
 
             <div class="form-group">
                 <label for="note_title">Submitter</label>
-                <input type="text" class="form-control" name="note_title" id="note_title" placeholder="user.a@domain.com">
+                <input type="text" class="form-control" name="note_title" id="note_title" placeholder="user.a@domain.com" required>
             </div>
 
             <input type="hidden" name="project" value="{{p}}" />
@@ -67,7 +67,7 @@
 
             <div class="form-group">
                 <label for="note_title">Submitter</label>
-                <input type="text" class="form-control" name="note_title" id="note_title" placeholder="user.a@domain.com">
+                <input type="text" class="form-control" name="note_title" id="note_title" placeholder="user.a@domain.com" required>
             </div>
 
             <button type="submit" class="btn btn-default">Run</button>
