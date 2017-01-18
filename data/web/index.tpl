@@ -107,13 +107,13 @@
 <form class="form-inline" role="form" action="/search" enctype="multipart/form-data" method="post" name="search" target="_self">
   <div class="form-group">
       <select class="form-control" name="key">
+        <option value="note">Sender</option>
         <option value="name">Name</option>
         <option value="type">Type</option>
         <option value="mime">Mime</option>
         <option value="md5">MD5</option>
         <option value="sha256">SHA256</option>
         <option value="tag">Tag</option>
-        <option value="note">Note</option>
     </select>
   </div>
 
