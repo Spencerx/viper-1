@@ -38,6 +38,13 @@ try:
 except ImportError:
     from os import walk
 
+import requests
+import argparse
+import tempfile
+import contextlib
+import tarfile
+
+
 
 ###
 # Needed for bottle (and correct uwsgi handling)
@@ -177,7 +184,9 @@ def parse_text(module_text):
 
 def project_list():
     # Get a list of projects
-    projects_path = __project__.get_projects_path()
+
+    projects_path = os.path.join(os.getcwd(), 'projects')
+
     p_list = []
     if os.path.exists(projects_path):
         for project in os.listdir(projects_path):
@@ -186,9 +195,8 @@ def project_list():
                 p_list.append(project)
     return p_list
 
-# this will allow complex command line parameters to be passed in via the
-# web gui
 
+# this will allow complex command line parameters to be passed in via the web gui
 
 def module_cmdline(cmd_line, file_hash):
     html = ""
@@ -250,8 +258,6 @@ def module_text(cmd_string, file_hash):
     return html
 
 # context manager for file uploader
-
-
 @contextlib.contextmanager
 def upload_temp():
     temp_dir = tempfile.mkdtemp()
@@ -766,12 +772,22 @@ def cuckoo_submit():
     # Get Query Strings
     project = request.query.project
     file_hash = request.query.hash
+    instance = request.query.instance
     if project in project_list():
         __project__.open(project)
     else:
         __project__.open('default')
         project = 'default'
-
+    if instance:
+        print instance
+        if instance == "offline":
+            cuckoo_api = 'http://cuckoo-offline:8090'
+            cuckoo_web = 'http://cuckoo-offline:9191'
+        elif instance == "online":
+            cuckoo_api = 'http://cuckoo-online:8090'
+            cuckoo_web = 'http://cuckoo-online:9191'
+    else:
+        return '<span class="alert alert-danger">Invalid Submission</span>'
     # Open a session
     try:
         path = get_sample_path(file_hash)
@@ -824,8 +840,9 @@ def hex_viewer():
     hex_path = get_sample_path(file_hash)
 
     # create the command string
-    hex_cmd = 'hexdump -C -s {0} -n {1} {2}'.format(
-        hex_offset, hex_length, hex_path)
+
+    hex_cmd = 'hexdump -C -s {0} -n {1} {2}'.format(hex_offset, hex_length, hex_path)
+
 
     # get the output
     hex_string = getoutput(hex_cmd)
