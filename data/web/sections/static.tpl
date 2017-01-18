@@ -42,7 +42,7 @@
         </tr>
         <tr>
             <th></th>
-            <td><a class="btn btn-primary btn-small" href="/get/{{project}}/{{file_info[8]}}">Download</a> <a class="btn btn-primary btn-small" onClick="$('#cuckoo').load('/cuckoo/submit?hash={{file_info[8]}}&amp;project={{project}}&amp;instance=offline');">Cuckoo-Offline</a><span id="cuckoo2"></span> <a class="btn btn-primary btn-small btn-danger" onClick="bootbox.confirm('Have you received correct authorisation to perform an analysing using the open web?',function(result){if(result){$('#cuckoo').load('/cuckoo/submit?hash={{file_info[8]}}&amp;project={{project}}&amp;instance=online')}})">Cuckoo-Online</a>  <span id="cuckoo"></span></td>
+            <td><a class="btn btn-danger btn-small" href="/delete/{{file_info[8]}}">Delete</a> <a class="btn btn-primary btn-small" href="/get/{{project}}/{{file_info[8]}}">Download</a> <a class="btn btn-primary btn-small" onClick="$('#cuckoo').load('/cuckoo/submit?hash={{file_info[8]}}&amp;project={{project}}&amp;instance=offline');">Cuckoo-Offline</a><span id="cuckoo2"></span> <a class="btn btn-primary btn-small btn-danger" onClick="bootbox.confirm('Have you received correct authorisation to perform an analysing using the open web?',function(result){if(result){$('#cuckoo').load('/cuckoo/submit?hash={{file_info[8]}}&amp;project={{project}}&amp;instance=online')}})">Cuckoo-Online</a>  <span id="cuckoo"></span></td>
         </tr>
     </table>
 

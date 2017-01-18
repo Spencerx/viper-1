@@ -32,7 +32,12 @@
                 <label for="tag_list">Tags</label>
                 <input type="text" class="form-control" name="tag_list" id="tag_list" placeholder="List of Tags">
             </div>
-            
+
+            <div class="form-group">
+                <label for="note_title">Submitter</label>
+                <input type="text" class="form-control" name="note_title" id="note_title" placeholder="user.a@domain.com" required>
+            </div>
+
             <input type="hidden" name="project" value="{{p}}" />
             <button type="submit" class="btn btn-default">Upload</button>
         </form>
@@ -58,6 +63,11 @@
             <div class="form-group">
                 <label for="tag_list">Tags</label>
                 <input type="text" class="form-control" name="tag_list" id="tag_list" placeholder="List of Tags">
+            </div>
+
+            <div class="form-group">
+                <label for="note_title">Submitter</label>
+                <input type="text" class="form-control" name="note_title" id="note_title" placeholder="user.a@domain.com" required>
             </div>
 
             <button type="submit" class="btn btn-default">Run</button>
@@ -136,21 +146,37 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>SHA256</th>
+                <th>Submitted</th>
+                <th>Sender</th>
+                <th>MD5</th>
                 <th>Tags</th>
             </tr>
             % for row in latest:
             <tr>
                 <td>{{row.id}}</td>
                 <td><a href="/file/{{p}}/{{row.sha256}}">{{row.name}}</a></td>
-                <td><span class="mono">{{row.sha256}}</span></td>
+                <td>{{row.created_at}}</td>
+                <td>
+                  <% for text in row.note:
+                         try:
+                             txt = text.title.split('|')[2]
+                             txt = txt.split('<')[1]
+                             txt = str(txt.split('>')[0])
+                         except:
+                             txt = text.title
+                         end
+                  %>
+                  {{txt}}
+                  % end
+                </td>
+                <td><span class="mono">{{row.md5}}</span></td>
                 <td>
                 % for tags in row.tag:
                 {{tags.tag}},
                 % end
                 </td>
             </tr>
-            % end      
+            % end
         </table>
 
 </div>
@@ -168,17 +194,17 @@ cur_page = int(act_page)
     <!-- pagination -->
     <div class="text-center">
         <ul class="pagination">
-            
+
           <li><a href="/project/{{p}}?page={{cur_page-1}}">&laquo;</a></li>
           % for i in range(num_pages):
           <li
-          % if act_page: 
-          % if i == cur_page: 
-          class="active" 
+          % if act_page:
+          % if i == cur_page:
+          class="active"
           % end
           % end
           >
-          
+
           <a href="/project/{{p}}?page={{i}}">{{i}}</a></li>
           % end
           <li><a href="/project/{{p}}?page={{cur_page+1}}">&raquo;</a></li>
