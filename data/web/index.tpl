@@ -1,6 +1,9 @@
 % include("header.tpl", title="Viper Web Interface")
 
-
+<div class="jumbotron" style="text-align: center;">
+  <h1>{{count}}</h1>
+  Total samples
+</div>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Upload Sample</h3>
