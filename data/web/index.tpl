@@ -75,7 +75,7 @@
     </div>
 </div>
 
-<!-- Download from VirusTotal -->
+<!-- Download from VirusTotal
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">VT Download</h3>
@@ -95,7 +95,7 @@
             <button type="submit" class="btn btn-default">Run</button>
         </form>
     </div>
-</div>
+</div>-->
 
 
 <!-- Search -->
