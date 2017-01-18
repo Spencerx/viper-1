@@ -1,11 +1,11 @@
 
 function setOptions(chosen) {
 var selbox = document.modules.command;
- 
+
 selbox.options.length = 0;
 if (chosen == " ") {
   selbox.options[selbox.options.length] = new Option('Select a Module First',' ');
- 
+
 }
 if (chosen == "apk") {
   selbox.options[selbox.options.length] = new Option('Help','help');
@@ -80,7 +80,7 @@ if (chosen == "jar") {
 if (chosen == "office") {
   selbox.options[selbox.options.length] = new Option('MetaData','meta');
   selbox.options[selbox.options.length] = new Option('OLE Information','oleid');
-  selbox.options[selbox.options.length] = new Option('Document Streams','streams');  
+  selbox.options[selbox.options.length] = new Option('Document Streams','streams');
   selbox.options[selbox.options.length] = new Option('Export Streams','export');
 }
 
@@ -121,6 +121,7 @@ if (chosen == "shellcode") {
 if (chosen == "strings") {
   selbox.options[selbox.options.length] = new Option('All Strings','all');
   selbox.options[selbox.options.length] = new Option('IP & Domain Strings','hosts');
+  selbox.options[selbox.options.length] = new Option('Interesting Strings','interesting');
 }
 
 if (chosen == "swf") {
