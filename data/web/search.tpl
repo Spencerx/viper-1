@@ -10,14 +10,36 @@
                 <table class="table table-striped table-bordered">
                     <tr>
                         <th>Name</th>
-                        <th>Sha256</th>
+                        <th>Submitted</th>
+                        <th>Sender</th>
+                        <th>MD5</th>
+                        <th>Tags</th>
                     </tr>
                     % for res in results[proj]:
                         <tr>
-                            <td><a href="/file/{{proj}}/{{res[1]}}">{{res[0]}}</a></td>
+                            <td><a href="/file/{{proj}}/{{res[3]}}">{{res[0]}}</a></td>
                             <td>{{res[1]}}</td>
+                            <td>
+                              <% for text in res[2]:
+                                     try:
+                                         txt = text.title.split('|')[2]
+                                         txt = txt.split('<')[1]
+                                         txt = str(txt.split('>')[0])
+                                     except:
+                                         txt = text.title
+                                     end
+                              %>
+                              {{txt}}
+                              % end
+                            </td>
+                            <td>{{res[4]}}</td>
+                            <td>
+                            % for tags in res[5]:
+                            {{tags.tag}},
+                            % end
+                            </td>
                         </tr>
-                    % end      
+                    % end
                 </table>
             </div>
         </div>

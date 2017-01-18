@@ -38,12 +38,6 @@ try:
 except ImportError:
     from os import walk
 
-import requests
-import argparse
-import tempfile
-import contextlib
-import tarfile
-
 
 
 ###
@@ -196,7 +190,8 @@ def project_list():
     return p_list
 
 
-# this will allow complex command line parameters to be passed in via the web gui
+# this will allow complex command line parameters to be passed in via the
+# web gui
 
 def module_cmdline(cmd_line, file_hash):
     html = ""
@@ -258,6 +253,8 @@ def module_text(cmd_string, file_hash):
     return html
 
 # context manager for file uploader
+
+
 @contextlib.contextmanager
 def upload_temp():
     temp_dir = tempfile.mkdtemp()
@@ -601,7 +598,8 @@ def find_file():
         for row in rows:
             if project == 'default':
                 project = 'default'
-            proj_results.append([row.name, row.sha256])
+            proj_results.append(
+                [row.name, row.created_at, row.note, row.sha256, row.md5, row.tag])
         results[project] = proj_results
 
     return template('search.tpl', results=results)
@@ -841,8 +839,8 @@ def hex_viewer():
 
     # create the command string
 
-    hex_cmd = 'hexdump -C -s {0} -n {1} {2}'.format(hex_offset, hex_length, hex_path)
-
+    hex_cmd = 'hexdump -C -s {0} -n {1} {2}'.format(
+        hex_offset, hex_length, hex_path)
 
     # get the output
     hex_string = getoutput(hex_cmd)
