@@ -363,6 +363,48 @@ def file_info(file_hash, project=False):
 # Uses Context Manager to Remove Temp files
 
 
+@app.route('/delete/<file_hash>')
+@app.route('/file/delete/<file_hash>')
+def delete(file_hash):
+    success = False
+    key = ''
+    if len(file_hash) == 32:
+        key = 'md5'
+    elif len(file_hash) == 64:
+        key = 'sha256'
+    else:
+        return template('error.tpl', error="Invalid hash format")
+
+    db = Database()
+    rows = db.find(key=key, value=file_hash)
+
+    if not rows:
+        return template('error.tpl', error="File not found in database")
+
+    if rows:
+        malware_id = rows[0].id
+        path = get_sample_path(rows[0].sha256)
+        if db.delete_file(malware_id):
+            success = True
+        else:
+            return template('error.tpl', error="File not found in repository")
+
+    path = get_sample_path(rows[0].sha256)
+    if not path:
+        return template('error.tpl', error="File not found in file system")
+    else:
+        try:
+            os.remove(path)
+            success = True
+        except:
+            return template('error.tpl', error="Unable to delete file")
+
+    if success:
+        redirect("/")
+    else:
+        return template('error.tpl', error="Unable to delete file")
+
+
 @app.route('/add', method='POST')
 def add_file():
     tags = request.forms.get('tag_list')
