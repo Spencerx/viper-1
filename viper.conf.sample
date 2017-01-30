@@ -57,11 +57,11 @@ virustotal_key =
 
 [cuckoo]
 cuckoo_modified = False
-cuckoo_host = http://localhost:8080
+cuckoo_host = localhost
 
 [cuckoooffline]
 cuckoo_modified = False
-cuckoo_host = http://localhost:8080
+cuckoo_host = localhost
 
 [reports]
 malwr_login = https://malwr.com/account/login/
