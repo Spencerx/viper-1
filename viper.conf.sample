@@ -57,11 +57,15 @@ virustotal_key =
 
 [cuckoo]
 cuckoo_modified = False
-cuckoo_host = localhost
+host = localhost
+api_port = 8000
+web_port = 8080
 
 [cuckoooffline]
 cuckoo_modified = False
-cuckoo_host = localhost
+host = localhost
+api_port = 8000
+web_port = 8080
 
 [reports]
 malwr_login = https://malwr.com/account/login/

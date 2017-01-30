@@ -53,8 +53,8 @@ app = application = bottle.default_app()
 
 web_port = 9090
 
-cuckoo_online = cfg.cuckoo.cuckoo_host
-cuckoo_offline = cfg.cuckoooffline.cuckoo_host
+cuckoo_online = cfg.cuckoo
+cuckoo_offline = cfg.cuckoooffline
 
 ##
 # End User Config
@@ -781,11 +781,11 @@ def cuckoo_submit():
     if instance:
         print instance
         if instance == "offline":
-            cuckoo_api = 'http://' + cuckoo_offline + ':8090'
-            cuckoo_web = 'http://' + cuckoo_offline + ':9191'
+            cuckoo_api = 'http://' + cuckoo_offline.host + cuckoo_offline.port
+            cuckoo_web = 'http://' + cuckoo_offline.host + cuckoo_offline.port
         elif instance == "online":
-            cuckoo_api = 'http://' + cuckoo_online + ':8090'
-            cuckoo_web = 'http://' + cuckoo_online + ':9191'
+            cuckoo_api = 'http://' + cuckoo_online.host + cuckoo_online.port
+            cuckoo_web = 'http://' + cuckoo_online.host + cuckoo_online.port
     else:
         return '<span class="alert alert-danger">Invalid Submission</span>'
     # Open a session
