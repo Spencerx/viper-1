@@ -781,11 +781,15 @@ def cuckoo_submit():
     if instance:
         print instance
         if instance == "offline":
-            cuckoo_api = 'http://' + cuckoo_offline.host + cuckoo_offline.api_port
-            cuckoo_web = 'http://' + cuckoo_offline.host + cuckoo_offline.web_port
+            cuckoo_api = 'http://' + cuckoo_offline.host + \
+                str(cuckoo_offline.api_port)
+            cuckoo_web = 'http://' + cuckoo_offline.host + \
+                str(cuckoo_offline.web_port)
         elif instance == "online":
-            cuckoo_api = 'http://' + cuckoo_online.host + cuckoo_online.api_port
-            cuckoo_web = 'http://' + cuckoo_online.host + cuckoo_online.web_port
+            cuckoo_api = 'http://' + cuckoo_online.host + \
+                str(cuckoo_online.api_port)
+            cuckoo_web = 'http://' + cuckoo_online.host + \
+                str(cuckoo_online.web_port)
     else:
         return '<span class="alert alert-danger">Invalid Submission</span>'
     # Open a session
