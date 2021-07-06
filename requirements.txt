@@ -24,7 +24,7 @@ pypssl==2.1
 python-dateutil==2.4.2
 python-magic==0.4.10
 r2pipe==0.8.0
-requests==2.9.1
+requests==2.20.0
 requests-cache==0.4.10
 scandir==1.2
 six==1.10.0
